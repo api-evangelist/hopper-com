@@ -1,0 +1,623 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Airline API",
+    "version": "v1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send a Backend Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/events",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Events can be send directly from partner backend using the same authentication as the other endpoints"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new session for which events will be collected."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cancel For Any Reason (CFAR)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create CFAR Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_offers",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create CFAR offers for a user's trip"
+        },
+        {
+          "info": {
+            "name": "Create External CFAR Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_offers/external",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a CFAR offer with externally provided pricing and coverage details (temporal API for data migration)"
+        },
+        {
+          "info": {
+            "name": "Create a CFAR Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_contracts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a CFAR contract from selected CFAR offer(s)."
+        },
+        {
+          "info": {
+            "name": "Get a CFAR Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_contracts/:id",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a contract"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a CFAR contract"
+        },
+        {
+          "info": {
+            "name": "Update CFAR Contract Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_contracts/:id/update_status",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a contract"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the CFAR contract"
+        },
+        {
+          "info": {
+            "name": "Update forms of payment of a CFAR Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_contracts/:id/forms_of_payment",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a contract"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update forms of payment linked with a CFAR contract"
+        },
+        {
+          "info": {
+            "name": "Process CFAR Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_contracts/:id/payment",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a contract"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "When HTS is the Merchant of Record (MoR), the customer's credit card is charged by HTS for the CFAR fee.\n\nHTS is relying on an external payment gateway to process the payments, it allows the partner airline to tokenize the customer's credit card details and then pass the generated token in HTS Ancillaries for Airlines API payment endpoints in order to process the payment and confirm the contract related to the purchased product.\n\n**Token URL**: https://core.spreedly.com/v1/payment_methods.json\n "
+        },
+        {
+          "info": {
+            "name": "Update CFAR Contract Itinerary Slices",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_contracts/:id/itinerary_slices",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a contract"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update itinerary slices of a CFAR contract."
+        },
+        {
+          "info": {
+            "name": "Create CFAR Exercise",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_contract_exercises",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record that a request to exercise a CFAR contract has occurred."
+        },
+        {
+          "info": {
+            "name": "Complete CFAR Exercise",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/cfar_contract_exercises/:id/mark_completed",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a exercise"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record that a request to exercise a CFAR contract has been completed"
+        },
+        {
+          "info": {
+            "name": "Get payout receipt PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/customer/cfar/payout/receipt",
+            "headers": [
+              {
+                "name": "verification-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Download payout receipt as PDF"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Disruption Guarantee (DG)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create DG Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/dg_offers",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create DG offers for a user's trip"
+        },
+        {
+          "info": {
+            "name": "Create a DG Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/dg_contracts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a DG contract from selected DG offer(s)."
+        },
+        {
+          "info": {
+            "name": "Get a DG contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/dg_contracts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a contract"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a DG contract"
+        },
+        {
+          "info": {
+            "name": "Process DG payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/dg_contracts/:id/payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a contract"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "When HTS is the Merchant of Record (MoR), the customer's credit card is charged by HTS for the DG fee.\n\nHTS is relying on an external payment gateway to process the payments, it allows the partner airline to tokenize the customer's credit card details and then pass the generated token in HTS Ancillaries for Airlines API payment endpoints in order to process the payment and confirm the contract related to the purchased product.\n\n**Token URL**: https://core.spreedly.com/v1/payment_methods.json\n  \n"
+        },
+        {
+          "info": {
+            "name": "Update DG Contract Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/dg_contracts/:id/update_status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a contract"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update DG Contract Status"
+        },
+        {
+          "info": {
+            "name": "Update DG Contract Itinerary Slices",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/dg_contracts/:id/itinerary_slices",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a contract"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update itinerary slices of a DG contract."
+        },
+        {
+          "info": {
+            "name": "Create DG Exercise",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/dg_contract_exercises",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record that a request to exercise a DG contract has occurred."
+        },
+        {
+          "info": {
+            "name": "Get payout receipt PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/customer/dg/payout/receipt",
+            "headers": [
+              {
+                "name": "verification-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Download payout receipt as PDF"
+        },
+        {
+          "info": {
+            "name": "Get session ID by DG exercise ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/customer/dg_exercises/:id/session",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for a exercise"
+              }
+            ]
+          },
+          "docs": "Retrieve the session ID for a given DG exercise ID"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an authentication token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/auth",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get an authentication token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
