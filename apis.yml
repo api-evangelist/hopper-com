@@ -65,11 +65,11 @@ apis:
         url: openapi/hopper-airlines-openapi.yml
       - type: Documentation
         url: https://github.com/hopper/hc-airlines-java
-      - type: SDK
+      - type: SDKs
         url: https://github.com/hopper/hc-airlines-java
-      - type: SDK
+      - type: SDKs
         url: https://github.com/hopper/hts-airlines-dotnet
-      - type: SDK
+      - type: SDKs
         url: https://github.com/hopper/hc-airlines-angular
 common:
   - type: Website
