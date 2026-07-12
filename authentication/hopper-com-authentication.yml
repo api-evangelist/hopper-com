@@ -1,0 +1,33 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/hopper-airlines-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: PartnerAuth
+  type: http
+  scheme: bearer
+  description: |-
+    This API is authenticated with OAuth 2, Client Credentials grant.\
+    Clients should use their `client_id` and `client_secret` to obtain an `access_token`.\
+    The `access_token` should be included in every request, as a `Bearer` token on an `Authorization` header.\
+    Note that `access_token`s eventually expire, requiring a new token to be fetched.
+
+    see [authentication](#tag/Authentication)
+  sources:
+  - openapi/hopper-airlines-openapi.yml
+- name: SessionAuth
+  type: apiKey
+  in: header
+  parameter: HC-Session-ID
+  description: |-
+    # Header Parameters
+    | headerName      | description                                                                                        |
+    |-----------------|----------------------------------------------------------------------------------------------------|
+    | `HC-Session-ID` | string <br/> **Example**: `9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f`<br/>The ID of the current session |
+  sources:
+  - openapi/hopper-airlines-openapi.yml

@@ -72,6 +72,10 @@ apis:
       - type: SDKs
         url: https://github.com/hopper/hc-airlines-angular
 common:
+  - type: DomainSecurity
+    url: security/hopper-com-domain-security.yml
+  - type: Authentication
+    url: authentication/hopper-com-authentication.yml
   - type: Website
     url: https://www.hopper.com
   - type: B2B
@@ -104,6 +108,8 @@ common:
     url: https://twitter.com/hopper
   - type: LinkedIn
     url: https://www.linkedin.com/company/hopper
+  - url: https://hts.hopper.com/newsroom
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
