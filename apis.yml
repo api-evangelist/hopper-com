@@ -72,6 +72,8 @@ apis:
       - type: SDKs
         url: https://github.com/hopper/hc-airlines-angular
 common:
+  - type: AgenticAccess
+    url: agentic-access/hopper-com-agentic-access.yml
   - type: DomainSecurity
     url: security/hopper-com-domain-security.yml
   - type: Authentication
