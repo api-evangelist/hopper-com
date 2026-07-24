@@ -1,0 +1,210 @@
+openapi: 3.0.3
+info:
+  title: Airline Analytics API
+  version: v1.1
+  description: In order to measure and continuously improve HTS Ancillaries performance, specific events occurring during a customer session can be sent by the partner airlines using some dedicated endpoints.
+servers:
+- url: https://airlines-api.hopper.com/airline/v1.1
+tags:
+- description: In order to measure and continuously improve HTS Ancillaries performance, specific events occurring during a customer session can be sent by the partner airlines using some dedicated endpoints.
+  name: Analytics
+paths:
+  /events:
+    post:
+      description: Events can be send directly from partner backend using the same authentication as the other endpoints
+      operationId: postEvents
+      parameters:
+      - description: The ID of the current airline session, see [Sessions](#tag/Sessions)
+        example: 9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f
+        explode: false
+        in: header
+        name: HC-Session-ID
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/event'
+        required: true
+      responses:
+        '204':
+          description: The event has been successfully created
+          headers:
+            Expires:
+              explode: false
+              required: true
+              schema:
+                type: string
+              style: simple
+            Cache-Control:
+              explode: false
+              required: true
+              schema:
+                type: string
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+          description: Syntactic errors were encountered while handling the request
+        '401':
+          description: The client could not be authenticated
+        '403':
+          description: The authenticated client does not have permission to call this endpoint
+        '404':
+          description: The requested resource could not be found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unprocessable_entity'
+          description: Semantic errors were encountered while handling the request
+        '500':
+          description: The server encountered an internal error
+      security:
+      - PartnerAuth: []
+        apiKeyAuth: []
+      summary: Send a Backend Event
+      tags:
+      - Analytics
+components:
+  schemas:
+    booking_confirmed:
+      properties:
+        occurred_date_time:
+          description: "A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime;\n the date and time at which an event occurred on a client device"
+          example: 2022-01-24 15:34:30+00:00
+          format: date-time
+          type: string
+        cfar_contract_id:
+          description: The purchased CFAR contract, if one is present
+          type: string
+        dg_contract_id:
+          description: The purchased DG contract, if one is present
+          type: string
+        type:
+          enum:
+          - booking_confirmed
+          type: string
+      required:
+      - occurred_date_time
+      - type
+      title: booking_confirmed
+      type: object
+    event:
+      discriminator:
+        mapping:
+          booking_confirmed: '#/components/schemas/booking_confirmed'
+          offers_displayed: '#/components/schemas/offers_displayed'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/booking_confirmed'
+      - $ref: '#/components/schemas/offers_displayed'
+      title: event
+    bad_request:
+      example:
+        errors:
+        - code: code
+          messages:
+            key: messages
+          message: message
+        - code: code
+          messages:
+            key: messages
+          message: message
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/error'
+          type: array
+      required:
+      - errors
+      title: bad_request
+      type: object
+    unprocessable_entity:
+      example:
+        errors:
+        - code: code
+          messages:
+            key: messages
+          message: message
+        - code: code
+          messages:
+            key: messages
+          message: message
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/error'
+          type: array
+      required:
+      - errors
+      title: unprocessable_entity
+      type: object
+    offers_displayed:
+      properties:
+        occurred_date_time:
+          description: "A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime;\n the date and time at which an event occurred on a client device"
+          example: 2022-01-24 15:34:30+00:00
+          format: date-time
+          type: string
+        type:
+          enum:
+          - offers_displayed
+          type: string
+      required:
+      - occurred_date_time
+      - type
+      title: offers_displayed
+      type: object
+    error:
+      example:
+        code: code
+        messages:
+          key: messages
+        message: message
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+        messages:
+          additionalProperties:
+            type: string
+          title: map_string
+          type: object
+      required:
+      - message
+      title: error
+      type: object
+  securitySchemes:
+    PartnerAuth:
+      description: 'This API is authenticated with OAuth 2, Client Credentials grant.\
+
+        Clients should use their `client_id` and `client_secret` to obtain an `access_token`.\
+
+        The `access_token` should be included in every request, as a `Bearer` token on an `Authorization` header.\
+
+        Note that `access_token`s eventually expire, requiring a new token to be fetched.
+
+
+        see [authentication](#tag/Authentication)'
+      scheme: bearer
+      type: http
+    SessionAuth:
+      description: '# Header Parameters
+
+        | headerName      | description                                                                                        |
+
+        |-----------------|----------------------------------------------------------------------------------------------------|
+
+        | `HC-Session-ID` | string <br/> **Example**: `9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f`<br/>The ID of the current session |
+
+        '
+      in: header
+      name: HC-Session-ID
+      type: apiKey

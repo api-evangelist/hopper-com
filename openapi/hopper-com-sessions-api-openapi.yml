@@ -1,0 +1,594 @@
+openapi: 3.0.3
+info:
+  title: Airline Analytics Sessions API
+  version: v1.1
+  description: In order to measure and continuously improve HTS Ancillaries performance, specific events occurring during a customer session can be sent by the partner airlines using some dedicated endpoints.
+servers:
+- url: https://airlines-api.hopper.com/airline/v1.1
+tags:
+- description: "Hopper uses a unique ID to correlate API calls and events produced by a user's interaction with an airline application.\nThe duration of the user's interactions is called a \"session\", and the correlation ID is called a `session_id`.\n\nA session begins immediately before the airline’s first API call to Hopper, and the airline must call the Create a Session endpoint at this time. \nA `session_id` is returned from this call; it must be included with each subsequent API call via the `HC-Session-ID` header. \nNo airline action is required to end the session.\n"
+  name: Sessions
+paths:
+  /sessions:
+    post:
+      description: Create a new session for which events will be collected.
+      operationId: postSessions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_airline_session_request'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/airline_session'
+          description: The created airline session
+          headers:
+            Expires:
+              explode: false
+              required: true
+              schema:
+                type: string
+              style: simple
+            Cache-Control:
+              explode: false
+              required: true
+              schema:
+                type: string
+              style: simple
+        '204':
+          description: The airline session creation request was not performed
+          headers:
+            Expires:
+              explode: false
+              required: true
+              schema:
+                type: string
+              style: simple
+            Cache-Control:
+              explode: false
+              required: true
+              schema:
+                type: string
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+          description: Syntactic errors were encountered while handling the request
+        '401':
+          description: The client could not be authenticated
+        '403':
+          description: The authenticated client does not have permission to call this endpoint
+        '404':
+          description: The requested resource could not be found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unprocessable_entity'
+          description: Semantic errors were encountered while handling the request
+        '500':
+          description: The server encountered an internal error
+      security:
+      - PartnerAuth: []
+        apiKeyAuth: []
+      summary: Create a Session
+      tags:
+      - Sessions
+components:
+  schemas:
+    opera:
+      properties:
+        version:
+          type: string
+        type:
+          enum:
+          - opera
+          type: string
+      required:
+      - type
+      title: opera
+      type: object
+    other_os:
+      properties:
+        name:
+          example: 15.0.2
+          type: string
+        version:
+          type: string
+        type:
+          enum:
+          - other_os
+          example: i_os
+          type: string
+      required:
+      - name
+      - type
+      title: other_os
+      type: object
+    operating_system:
+      discriminator:
+        mapping:
+          android: '#/components/schemas/android'
+          chrome_os: '#/components/schemas/chrome_os'
+          i_os: '#/components/schemas/i_os'
+          linux: '#/components/schemas/linux'
+          mac_os: '#/components/schemas/mac_os'
+          other_os: '#/components/schemas/other_os'
+          windows: '#/components/schemas/windows'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/android'
+      - $ref: '#/components/schemas/chrome_os'
+      - $ref: '#/components/schemas/i_os'
+      - $ref: '#/components/schemas/linux'
+      - $ref: '#/components/schemas/mac_os'
+      - $ref: '#/components/schemas/other_os'
+      - $ref: '#/components/schemas/windows'
+      title: operating_system
+    browser:
+      discriminator:
+        mapping:
+          chrome: '#/components/schemas/chrome'
+          edge: '#/components/schemas/edge'
+          firefox: '#/components/schemas/firefox'
+          internet_explorer: '#/components/schemas/internet_explorer'
+          opera: '#/components/schemas/opera'
+          other_browser: '#/components/schemas/other_browser'
+          safari: '#/components/schemas/safari'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/chrome'
+      - $ref: '#/components/schemas/edge'
+      - $ref: '#/components/schemas/firefox'
+      - $ref: '#/components/schemas/internet_explorer'
+      - $ref: '#/components/schemas/opera'
+      - $ref: '#/components/schemas/other_browser'
+      - $ref: '#/components/schemas/safari'
+      title: browser
+    other_browser:
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        type:
+          enum:
+          - other_browser
+          type: string
+      required:
+      - name
+      - type
+      title: other_browser
+      type: object
+    platform:
+      discriminator:
+        mapping:
+          app: '#/components/schemas/app'
+          web: '#/components/schemas/web'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/app'
+      - $ref: '#/components/schemas/web'
+      title: platform
+    desktop:
+      properties:
+        id:
+          description: A unique identifier for the end-user's device, generated by the partner
+          example: eb2dddb7-dc69-4521-9fbb-762b96eb921f
+          type: string
+        platform:
+          $ref: '#/components/schemas/platform'
+        ui_theme:
+          type: string
+        release_build:
+          type: string
+        type:
+          enum:
+          - desktop
+          example: mobile
+          type: string
+      required:
+      - id
+      - type
+      title: desktop
+      type: object
+    airline_session:
+      description: A airline session resource
+      example:
+        id: af585dfd-dddf-4726-9ef7-f1bb8909a79a
+      properties:
+        id:
+          description: A unique identifier for a airline session
+          example: af585dfd-dddf-4726-9ef7-f1bb8909a79a
+          type: string
+      required:
+      - id
+      title: airline_session
+      type: object
+    windows:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - windows
+          example: i_os
+          type: string
+      required:
+      - type
+      title: windows
+      type: object
+    app:
+      properties:
+        operating_system:
+          $ref: '#/components/schemas/operating_system'
+        type:
+          enum:
+          - app
+          example: app
+          type: string
+      required:
+      - type
+      title: app
+      type: object
+    edge:
+      properties:
+        version:
+          type: string
+        type:
+          enum:
+          - edge
+          type: string
+      required:
+      - type
+      title: edge
+      type: object
+    mac_os:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - mac_os
+          example: i_os
+          type: string
+      required:
+      - type
+      title: mac_os
+      type: object
+    web:
+      properties:
+        operating_system:
+          $ref: '#/components/schemas/operating_system'
+        browser:
+          $ref: '#/components/schemas/browser'
+        type:
+          enum:
+          - web
+          example: app
+          type: string
+      required:
+      - type
+      title: web
+      type: object
+    tablet:
+      properties:
+        id:
+          description: A unique identifier for the end-user's device, generated by the partner
+          example: eb2dddb7-dc69-4521-9fbb-762b96eb921f
+          type: string
+        platform:
+          $ref: '#/components/schemas/platform'
+        ui_theme:
+          type: string
+        release_build:
+          type: string
+        type:
+          enum:
+          - tablet
+          example: mobile
+          type: string
+      required:
+      - id
+      - type
+      title: tablet
+      type: object
+    internet_explorer:
+      properties:
+        version:
+          type: string
+        type:
+          enum:
+          - internet_explorer
+          type: string
+      required:
+      - type
+      title: internet_explorer
+      type: object
+    device:
+      description: The end-user's device
+      discriminator:
+        mapping:
+          desktop: '#/components/schemas/desktop'
+          mobile: '#/components/schemas/mobile'
+          tablet: '#/components/schemas/tablet'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/desktop'
+      - $ref: '#/components/schemas/mobile'
+      - $ref: '#/components/schemas/tablet'
+      title: device
+    bad_request:
+      example:
+        errors:
+        - code: code
+          messages:
+            key: messages
+          message: message
+        - code: code
+          messages:
+            key: messages
+          message: message
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/error'
+          type: array
+      required:
+      - errors
+      title: bad_request
+      type: object
+    android:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - android
+          example: i_os
+          type: string
+      required:
+      - type
+      title: android
+      type: object
+    unprocessable_entity:
+      example:
+        errors:
+        - code: code
+          messages:
+            key: messages
+          message: message
+        - code: code
+          messages:
+            key: messages
+          message: message
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/error'
+          type: array
+      required:
+      - errors
+      title: unprocessable_entity
+      type: object
+    error:
+      example:
+        code: code
+        messages:
+          key: messages
+        message: message
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+        messages:
+          additionalProperties:
+            type: string
+          title: map_string
+          type: object
+      required:
+      - message
+      title: error
+      type: object
+    mobile:
+      properties:
+        id:
+          description: A unique identifier for the end-user's device, generated by the partner
+          example: eb2dddb7-dc69-4521-9fbb-762b96eb921f
+          type: string
+        platform:
+          $ref: '#/components/schemas/platform'
+        ui_theme:
+          type: string
+        release_build:
+          type: string
+        type:
+          enum:
+          - mobile
+          example: mobile
+          type: string
+      required:
+      - id
+      - type
+      title: mobile
+      type: object
+    linux:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - linux
+          example: i_os
+          type: string
+      required:
+      - type
+      title: linux
+      type: object
+    chrome_os:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - chrome_os
+          example: i_os
+          type: string
+      required:
+      - type
+      title: chrome_os
+      type: object
+    product:
+      description: The product for which the session is opened.<br/>Required for sessions having flow_type "exercise".
+      enum:
+      - cfar
+      - dg
+      - all
+      title: product
+      type: string
+    user_info:
+      description: An object containing information related to the airline's user. Should be included if known, but not if the user is anonymous.
+      properties:
+        airline_user_id:
+          description: The airline's unique identifier for a user; can be an arbitrary string
+          example: 2bcd6619-ac3e-403b-9982-3e12f2698a53
+          type: string
+        created_date_time:
+          description: A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime; the date and time at which a user's account was created
+          example: 2020-11-02 18:34:30+00:00
+          format: date-time
+          type: string
+        previous_bookings:
+          description: Number of prior bookings a user has made
+          example: 3
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - airline_user_id
+      title: user_info
+      type: object
+    safari:
+      properties:
+        version:
+          type: string
+        type:
+          enum:
+          - safari
+          type: string
+      required:
+      - type
+      title: safari
+      type: object
+    create_airline_session_request:
+      properties:
+        flow_type:
+          $ref: '#/components/schemas/flow_type'
+        user_info:
+          $ref: '#/components/schemas/user_info'
+        session_id:
+          description: The custom identifier for the customer's session. If omitted, a new session ID will be generated.
+          example: d93dd7c9-39c0-499d-903b-d837282231c7
+          type: string
+        device:
+          $ref: '#/components/schemas/device'
+        point_of_sale:
+          description: An ISO 3166-1-alpha-2 country code; the point of sale of the user
+          example: US
+          type: string
+        language:
+          description: A ISO_639-1 country code; the language associated with the user
+          example: es
+          type: string
+        product:
+          $ref: '#/components/schemas/product'
+      required:
+      - flow_type
+      - language
+      - point_of_sale
+      title: create_airline_session_request
+      type: object
+    i_os:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - i_os
+          example: i_os
+          type: string
+      required:
+      - type
+      title: i_os
+      type: object
+    firefox:
+      properties:
+        version:
+          type: string
+        type:
+          enum:
+          - firefox
+          type: string
+      required:
+      - type
+      title: firefox
+      type: object
+    flow_type:
+      description: The flow type for which the session is opened.
+      enum:
+      - purchase
+      - exercise
+      title: flow_type
+      type: string
+    chrome:
+      properties:
+        version:
+          type: string
+        type:
+          enum:
+          - chrome
+          type: string
+      required:
+      - type
+      title: chrome
+      type: object
+  securitySchemes:
+    PartnerAuth:
+      description: 'This API is authenticated with OAuth 2, Client Credentials grant.\
+
+        Clients should use their `client_id` and `client_secret` to obtain an `access_token`.\
+
+        The `access_token` should be included in every request, as a `Bearer` token on an `Authorization` header.\
+
+        Note that `access_token`s eventually expire, requiring a new token to be fetched.
+
+
+        see [authentication](#tag/Authentication)'
+      scheme: bearer
+      type: http
+    SessionAuth:
+      description: '# Header Parameters
+
+        | headerName      | description                                                                                        |
+
+        |-----------------|----------------------------------------------------------------------------------------------------|
+
+        | `HC-Session-ID` | string <br/> **Example**: `9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f`<br/>The ID of the current session |
+
+        '
+      in: header
+      name: HC-Session-ID
+      type: apiKey
