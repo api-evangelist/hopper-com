@@ -16,9 +16,21 @@ description: >-
   with OpenAPI-generated SDKs for Java, .NET, Angular, and iOS, plus a
   JavaScript SDK for hotel price-freeze integration.
 type: Index
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hopper-com.png
 tags:
   - Travel
   - Travel Fintech
@@ -39,38 +51,236 @@ created: '2026-05-25'
 modified: '2026-05-25'
 specificationVersion: '0.20'
 apis:
-  - aid: hopper-com:hts-airline-api
-    name: HTS Airline API
-    description: >-
-      The Hopper Technology Solutions Airline API lets airlines embed Hopper's
-      ancillary fintech products — Cancel For Any Reason (CFAR) and Disruption
-      Guarantee (DG) — directly into their booking flow. Airlines call the API
-      to create a user session, request CFAR or DG offers for an itinerary,
-      bind an offer into a contract, take payment, update itinerary slices,
-      and later exercise the contract (cancel, refund, or rebook) on behalf
-      of the customer. The API is OAuth2 Client Credentials authenticated,
-      uses an HC-Session-ID correlation header, and exposes 23 operations
-      under https://airlines-api.hopper.com/airline/v1.1.
-    humanURL: https://github.com/hopper/hc-airlines-java
-    baseURL: https://airlines-api.hopper.com/airline/v1.1
-    tags:
-      - Airlines
-      - Travel Fintech
-      - Cancel For Any Reason
-      - Disruption Guarantee
-      - Ancillary Revenue
-      - OAuth2
-    properties:
-      - type: OpenAPI
-        url: openapi/hopper-airlines-openapi.yml
-      - type: Documentation
-        url: https://github.com/hopper/hc-airlines-java
-      - type: SDKs
-        url: https://github.com/hopper/hc-airlines-java
-      - type: SDKs
-        url: https://github.com/hopper/hts-airlines-dotnet
-      - type: SDKs
-        url: https://github.com/hopper/hc-airlines-angular
+- aid: hopper-com:hopper-com-analytics-api
+  name: Hopper Analytics API
+  description: >-
+    In order to measure and continuously improve HTS Ancillaries performance, specific events occurring
+    during a customer session can be sent by the partner airlines using some dedicated endpoints.
+  humanURL: https://github.com/hopper/hc-airlines-java
+  baseURL: https://airlines-api.hopper.com/airline/v1.1
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/hopper-com-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hts-airlines-dotnet
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-angular
+- aid: hopper-com:hopper-com-authentication-api
+  name: Hopper Authentication API
+  description: >-
+    This API is authenticated with OAuth 2, Client Credentials grant.\
+
+    Clients should use their `client_id` and `client_secret` to obtain an `access_token`.\
+
+    The `access_token` should be included in every request, as a `Bearer` token on an `Authorization`
+    header.\
+
+    Note that `access_token`s eventually expire, requiring a new token to be fetched.
+
+
+    see [authentication](#tag/Authentication)
+  humanURL: https://github.com/hopper/hc-airlines-java
+  baseURL: https://airlines-api.hopper.com/airline/v1.1
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/hopper-com-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hts-airlines-dotnet
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-angular
+- aid: hopper-com:hopper-com-cancel-for-any-reason-cfar-api
+  name: Hopper Cancel For Any Reason (CFAR) API
+  description: >-
+    **What is Cancel For Any Reason?**
+
+
+    Cancel For Any Reason (CFAR) enables airlines to offer refundability as an ancillary with HTS powering
+    the dynamic pricing and supporting the refund cost.
+
+
+    ****
+
+
+    **How it works**
+
+
+    There are two distinct flows for CFAR:
+
+
+    - The _purchase flow_, enabling customers to purchase the product within the airline’s booking flow.
+
+    - The _exercise flow_, enabling customers to cancel their booking and get a refund.
+
+
+    For each of these flows, the first step is to [Create a Session](#operation/postSessions)
+
+
+    Both the purchase and the exercise of CFAR should be tracked by the airline in the airline’s Passenger
+    Name Record (PNR) according to the applicable industry standards.
+
+
+    ****
+
+
+    **Purchase flow**
+
+
+    CFAR follows the industry standard of a two step purchase process.
+
+
+    1. Once the user is landing on the page displaying the CFAR offer, the airline will call the [Create
+    CFAR Offers](#operation/postCfar_offers) endpoint. CFAR Offers can be created at multiple granular
+    levels. The request must include a description of the Itinerary for which the offers are requested.
+    The response will contain
+
+       - the price for the product (`premium`),
+       - the refundable amount (`coverage`),
+       - the UTC date and time until when the cancellation can be requested (`contract_expiry_date_time`)
+       - and the description of the offer in the available languages (`contents`).
+
+    2. If a user is attaching CFAR to his booking, the airline will call the [Create CFAR Contract](#operation/postCfar_contracts)
+    endpoint. The request must include the selected `offer_id`(s) and a description of the Itinerary for
+    which the contract is requested, which must match the one of the Offer(s). At this stage, the CFAR
+    Contract is only _created_. It will be confirmed once the customer has made the payment, which can
+    be done in two ways:
+
+        1. If the airline is the Merchant of Records (MoR), it will capture the payment for the total
+    amount of the booking, including the CFAR fee amount. Upon a successful payment, the airline will
+    call the Update CFAR Contract Status endpoint to set the CFAR contract to _confirmed_. The airline
+    will track this purchase in its PNR following the industry standards that apply to ticketing or ticketless
+    carriers.
+        2. If HTS is the Merchant of Records (MoR), the airline will capture the payment for the amount
+    of the booking excluding the CFAR fee, while HTS will capture the payment for the CFAR fee amount.
+    Upon a successful payment of its portion, the airline will call the Process CFAR Payment endpoint
+    for HTS to capture the payment for the CFAR fee amount. Once successful, the CFAR contract will be
+    set to _confirmed_. The airline will track this purchase in its PNR.
+
+    The details of a CFAR contract can be retrieved at any time through the Get a CFAR Contract endpoint.
+
+
+    ****
+
+
+    **Exercise flow**
+
+
+    CFAR exercise follows a two step process.
+
+
+    1. The user will request the exercise from the “Manage My Bookings” (MMB) page of the airline, through
+    a dedicated Call to action displayed based on the tracker added to the PNR at the time of booking.
+    Once the user is requesting the exercise, the airline will call the [Create CFAR Exercise](#operation/postCfar_contract_exercises)
+    endpoint to authorize the exercise. The request must include the Contract ID, the Itinerary at the
+    time of the exercise request and some optional information on the refund option that may be offered
+    by the airline. If eligible to the exercise, the response will contain the refundable amounts, both
+    in cash and Future Travel Credit (FTC) if applicable.
+
+    2. Once the user has followed the steps of the refund portal and confirmed the cancellation request,
+    HTS will make a call back to the airline to launch the PNR update flow on the airline’s end. The actual
+    PNR update flow depends on each airline’s specifics and is not described here. Upon a successful update
+    of the PNR, the airline will confirm the exercise to HTS by calling the [Complete CFAR Exercise](#operation/putCfar_contract_exercisesIdMark_completed)
+    endpoint.
+  humanURL: https://github.com/hopper/hc-airlines-java
+  baseURL: https://airlines-api.hopper.com/airline/v1.1
+  tags:
+  - Cancel For Any Reason (CFAR)
+  properties:
+  - type: OpenAPI
+    url: openapi/hopper-com-cancel-for-any-reason-cfar-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hts-airlines-dotnet
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-angular
+- aid: hopper-com:hopper-com-disruption-guarantee-dg-api
+  name: Hopper Disruption Guarantee (DG) API
+  description: "**What is Disruption Guarantee?**\n\nDisruption Guarantee (DG) offers a premium disruption\
+    \ assistance service to customers in case of flight disruption, including rebooking options on any\
+    \ airline or a refund option.\n\n****\n\n**How it works**\n\nThere are two distinct flows for DG:\n\
+    \n- The _purchase flow_, enabling customers to purchase the product within the airline’s booking flow.\n\
+    - The _exercise flow_, enabling customers to benefit from the premium disruption assistance service\
+    \ in case of a flight disruption.\n\nFor the _purchase flow_, the first step is to [Create a Session](#operation/postSessions)\n\
+    \nBoth the purchase and the exercise of DG should be tracked by the airline in the airline’s Passenger\
+    \ Name Record (PNR) according to the applicable industry standards.\n\n****\n\n**Purchase flow**\n\
+    \nDG follows the industry standard of a two step purchase process.\n\n1. Once the user is landing\
+    \ on the page displaying the DG offer, the airline will call the [Create DG Offers](#operation/postDg_offers)\
+    \ endpoint. DG Offers can be created at multiple granular levels. The request must include a description\
+    \ of the Itinerary for which the offers are requested. The response will contain\n\n   - the price\
+    \ for the product (`premium`),\n   - the refundable amount (`coverage`),\n   - the maximum price per\
+    \ passenger for a new flight (`service_cap`),\n   - the delay threshold to trigger the policy (`min_minuted_delay`),\n\
+    \   - the start of the timeframe to trigger the policy (`max_hours_before_departure`)\n   - and the\
+    \ description of the offer in the user’s language (`contents`).\n\n2. If a user is attaching DG to\
+    \ his booking, the airline will call the [Create DG Contract](#operation/postDg_contracts) endpoint.\
+    \ The request must include the selected offer\\_id(s) and a description of the Itinerary for which\
+    \ the contract is requested, which must match the one of the Offer. At this stage, the DG Contract\
+    \ is only _created_. It will be confirmed once the customer has made the payment, which can be done\
+    \ in two ways:\n\n   1. If the airline is the Merchant of Records (MoR), it will capture the payment\
+    \ for the total amount of the booking, including the DG fee amount. Upon a successful payment, the\
+    \ airline will call the Update DG Contract Status endpoint to set the DG contract to _confirmed_.\
+    \ The airline will track this purchase in its PNR following the industry standards that apply to ticketing\
+    \ or ticketless carriers.\n   2. If HTS is the Merchant of Records (MoR), the airline will capture\
+    \ the payment for the amount of the booking excluding the DG fee, while HTS will capture the payment\
+    \ for the DG fee amount. Upon a successful payment of its portion, the airline will call the Process\
+    \ DG Payment endpoint for HTS to capture the payment for the DG fee amount. Once successful, the DG\
+    \ contract will be set to _confirmed_. The airline will track this purchase in its PNR.\n   \nThe\
+    \ details of a DG contract can be retrieved at any time through the [Get a DG Contract](#operation/getDg_contractsId)\
+    \ endpoint.\n\n****\n\n**Exercise flow**\n\nIn this version of the API, the DG exercise is powered\
+    \ by HTS as a standalone flow, without any endpoint publicly exposed.\\\nIn a future version of the\
+    \ API, the DG exercise will be initialized from the “Manage My Bookings” (MMB) page of the airline.\
+    \ New endpoints will be released to that purpose."
+  humanURL: https://github.com/hopper/hc-airlines-java
+  baseURL: https://airlines-api.hopper.com/airline/v1.1
+  tags:
+  - Disruption Guarantee (DG)
+  properties:
+  - type: OpenAPI
+    url: openapi/hopper-com-disruption-guarantee-dg-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hts-airlines-dotnet
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-angular
+- aid: hopper-com:hopper-com-sessions-api
+  name: Hopper Sessions API
+  description: "Hopper uses a unique ID to correlate API calls and events produced by a user's interaction\
+    \ with an airline application.\nThe duration of the user's interactions is called a \"session\", and\
+    \ the correlation ID is called a `session_id`.\n\nA session begins immediately before the airline’s\
+    \ first API call to Hopper, and the airline must call the Create a Session endpoint at this time.\
+    \ \nA `session_id` is returned from this call; it must be included with each subsequent API call via\
+    \ the `HC-Session-ID` header. \nNo airline action is required to end the session."
+  humanURL: https://github.com/hopper/hc-airlines-java
+  baseURL: https://airlines-api.hopper.com/airline/v1.1
+  tags:
+  - Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/hopper-com-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-java
+  - type: SDKs
+    url: https://github.com/hopper/hts-airlines-dotnet
+  - type: SDKs
+    url: https://github.com/hopper/hc-airlines-angular
 common:
   - type: AgenticAccess
     url: agentic-access/hopper-com-agentic-access.yml
