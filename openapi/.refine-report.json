@@ -1,0 +1,22 @@
+{
+  "provider": "hopper-com",
+  "sources": [
+    "hopper-com-analytics-api-openapi.yml",
+    "hopper-com-authentication-api-openapi.yml",
+    "hopper-com-cancel-for-any-reason-cfar-api-openapi.yml",
+    "hopper-com-disruption-guarantee-dg-api-openapi.yml",
+    "hopper-com-sessions-api-openapi.yml"
+  ],
+  "outputs": [
+    "hopper-com-analytics-api-openapi.yml",
+    "hopper-com-authentication-api-openapi.yml",
+    "hopper-com-cancel-for-any-reason-cfar-api-openapi.yml",
+    "hopper-com-disruption-guarantee-dg-api-openapi.yml",
+    "hopper-com-sessions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
