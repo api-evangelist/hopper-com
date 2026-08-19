@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Airline Analytics Sessions API",
+    "version": "v1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new session for which events will be collected."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Airline Analytics API",
+    "version": "v1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send a Backend Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://airlines-api.hopper.com/airline/v1.1/events",
+            "headers": [
+              {
+                "name": "HC-Session-ID",
+                "value": "9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Events can be send directly from partner backend using the same authentication as the other endpoints"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

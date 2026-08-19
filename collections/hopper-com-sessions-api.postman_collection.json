@@ -1,0 +1,500 @@
+{
+  "item": [
+    {
+      "id": "c2ff41c7-511c-4c15-83f2-40564acc4f7a",
+      "name": "Sessions",
+      "description": {
+        "content": "Hopper uses a unique ID to correlate API calls and events produced by a user's interaction with an airline application.\nThe duration of the user's interactions is called a \"session\", and the correlation ID is called a `session_id`.\n\nA session begins immediately before the airline’s first API call to Hopper, and the airline must call the Create a Session endpoint at this time. \nA `session_id` is returned from this call; it must be included with each subsequent API call via the `HC-Session-ID` header. \nNo airline action is required to end the session.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eac90393-d85f-48a8-8246-89db3683f046",
+          "name": "Create a Session",
+          "request": {
+            "name": "Create a Session",
+            "description": {
+              "content": "Create a new session for which events will be collected.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flow_type\": \"<string>\",\n  \"language\": \"<string>\",\n  \"point_of_sale\": \"<string>\",\n  \"user_info\": {\n    \"airline_user_id\": \"<string>\",\n    \"created_date_time\": \"<dateTime>\",\n    \"previous_bookings\": \"<integer>\"\n  },\n  \"session_id\": \"<string>\",\n  \"device\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"platform\": {\n      \"type\": \"<string>\",\n      \"operating_system\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"ui_theme\": \"<string>\",\n    \"release_build\": \"<string>\"\n  },\n  \"product\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6e95bee-42b2-4cf3-b275-b31bd9b14a18",
+              "name": "The created airline session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"flow_type\": \"<string>\",\n  \"language\": \"es\",\n  \"point_of_sale\": \"US\",\n  \"user_info\": {\n    \"airline_user_id\": \"2bcd6619-ac3e-403b-9982-3e12f2698a53\",\n    \"created_date_time\": \"2020-11-02 18:34:30+00:00\",\n    \"previous_bookings\": 3\n  },\n  \"session_id\": \"d93dd7c9-39c0-499d-903b-d837282231c7\",\n  \"device\": {\n    \"id\": \"eb2dddb7-dc69-4521-9fbb-762b96eb921f\",\n    \"type\": \"<string>\",\n    \"platform\": {\n      \"type\": \"app\",\n      \"operating_system\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"ui_theme\": \"<string>\",\n    \"release_build\": \"<string>\"\n  },\n  \"product\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) ",
+                  "key": "Expires",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "(Required) ",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"af585dfd-dddf-4726-9ef7-f1bb8909a79a\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a4fcc9f-580a-46fa-a566-0f568b632bb6",
+              "name": "The airline session creation request was not performed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"flow_type\": \"<string>\",\n  \"language\": \"es\",\n  \"point_of_sale\": \"US\",\n  \"user_info\": {\n    \"airline_user_id\": \"2bcd6619-ac3e-403b-9982-3e12f2698a53\",\n    \"created_date_time\": \"2020-11-02 18:34:30+00:00\",\n    \"previous_bookings\": 3\n  },\n  \"session_id\": \"d93dd7c9-39c0-499d-903b-d837282231c7\",\n  \"device\": {\n    \"id\": \"eb2dddb7-dc69-4521-9fbb-762b96eb921f\",\n    \"type\": \"<string>\",\n    \"platform\": {\n      \"type\": \"app\",\n      \"operating_system\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"ui_theme\": \"<string>\",\n    \"release_build\": \"<string>\"\n  },\n  \"product\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) ",
+                  "key": "Expires",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "(Required) ",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb7597f3-3158-4fcc-b1fb-3737406c39e4",
+              "name": "Syntactic errors were encountered while handling the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"flow_type\": \"<string>\",\n  \"language\": \"es\",\n  \"point_of_sale\": \"US\",\n  \"user_info\": {\n    \"airline_user_id\": \"2bcd6619-ac3e-403b-9982-3e12f2698a53\",\n    \"created_date_time\": \"2020-11-02 18:34:30+00:00\",\n    \"previous_bookings\": 3\n  },\n  \"session_id\": \"d93dd7c9-39c0-499d-903b-d837282231c7\",\n  \"device\": {\n    \"id\": \"eb2dddb7-dc69-4521-9fbb-762b96eb921f\",\n    \"type\": \"<string>\",\n    \"platform\": {\n      \"type\": \"app\",\n      \"operating_system\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"ui_theme\": \"<string>\",\n    \"release_build\": \"<string>\"\n  },\n  \"product\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"code\",\n      \"messages\": {\n        \"key\": \"messages\"\n      },\n      \"message\": \"message\"\n    },\n    {\n      \"code\": \"code\",\n      \"messages\": {\n        \"key\": \"messages\"\n      },\n      \"message\": \"message\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7d1f7b8-7676-4a41-a656-4208f9101a62",
+              "name": "The client could not be authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"flow_type\": \"<string>\",\n  \"language\": \"es\",\n  \"point_of_sale\": \"US\",\n  \"user_info\": {\n    \"airline_user_id\": \"2bcd6619-ac3e-403b-9982-3e12f2698a53\",\n    \"created_date_time\": \"2020-11-02 18:34:30+00:00\",\n    \"previous_bookings\": 3\n  },\n  \"session_id\": \"d93dd7c9-39c0-499d-903b-d837282231c7\",\n  \"device\": {\n    \"id\": \"eb2dddb7-dc69-4521-9fbb-762b96eb921f\",\n    \"type\": \"<string>\",\n    \"platform\": {\n      \"type\": \"app\",\n      \"operating_system\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"ui_theme\": \"<string>\",\n    \"release_build\": \"<string>\"\n  },\n  \"product\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cbc6f9cf-c211-475d-9ad8-9d3b18662984",
+              "name": "The authenticated client does not have permission to call this endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"flow_type\": \"<string>\",\n  \"language\": \"es\",\n  \"point_of_sale\": \"US\",\n  \"user_info\": {\n    \"airline_user_id\": \"2bcd6619-ac3e-403b-9982-3e12f2698a53\",\n    \"created_date_time\": \"2020-11-02 18:34:30+00:00\",\n    \"previous_bookings\": 3\n  },\n  \"session_id\": \"d93dd7c9-39c0-499d-903b-d837282231c7\",\n  \"device\": {\n    \"id\": \"eb2dddb7-dc69-4521-9fbb-762b96eb921f\",\n    \"type\": \"<string>\",\n    \"platform\": {\n      \"type\": \"app\",\n      \"operating_system\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"ui_theme\": \"<string>\",\n    \"release_build\": \"<string>\"\n  },\n  \"product\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b2f3c12-10f4-4214-8295-351cfc90a5b9",
+              "name": "The requested resource could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"flow_type\": \"<string>\",\n  \"language\": \"es\",\n  \"point_of_sale\": \"US\",\n  \"user_info\": {\n    \"airline_user_id\": \"2bcd6619-ac3e-403b-9982-3e12f2698a53\",\n    \"created_date_time\": \"2020-11-02 18:34:30+00:00\",\n    \"previous_bookings\": 3\n  },\n  \"session_id\": \"d93dd7c9-39c0-499d-903b-d837282231c7\",\n  \"device\": {\n    \"id\": \"eb2dddb7-dc69-4521-9fbb-762b96eb921f\",\n    \"type\": \"<string>\",\n    \"platform\": {\n      \"type\": \"app\",\n      \"operating_system\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"ui_theme\": \"<string>\",\n    \"release_build\": \"<string>\"\n  },\n  \"product\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "02b2328c-0880-4b92-b4cd-b654dff31182",
+              "name": "Semantic errors were encountered while handling the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"flow_type\": \"<string>\",\n  \"language\": \"es\",\n  \"point_of_sale\": \"US\",\n  \"user_info\": {\n    \"airline_user_id\": \"2bcd6619-ac3e-403b-9982-3e12f2698a53\",\n    \"created_date_time\": \"2020-11-02 18:34:30+00:00\",\n    \"previous_bookings\": 3\n  },\n  \"session_id\": \"d93dd7c9-39c0-499d-903b-d837282231c7\",\n  \"device\": {\n    \"id\": \"eb2dddb7-dc69-4521-9fbb-762b96eb921f\",\n    \"type\": \"<string>\",\n    \"platform\": {\n      \"type\": \"app\",\n      \"operating_system\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"ui_theme\": \"<string>\",\n    \"release_build\": \"<string>\"\n  },\n  \"product\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"code\",\n      \"messages\": {\n        \"key\": \"messages\"\n      },\n      \"message\": \"message\"\n    },\n    {\n      \"code\": \"code\",\n      \"messages\": {\n        \"key\": \"messages\"\n      },\n      \"message\": \"message\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66289c47-604b-4617-a869-22d530902517",
+              "name": "The server encountered an internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"flow_type\": \"<string>\",\n  \"language\": \"es\",\n  \"point_of_sale\": \"US\",\n  \"user_info\": {\n    \"airline_user_id\": \"2bcd6619-ac3e-403b-9982-3e12f2698a53\",\n    \"created_date_time\": \"2020-11-02 18:34:30+00:00\",\n    \"previous_bookings\": 3\n  },\n  \"session_id\": \"d93dd7c9-39c0-499d-903b-d837282231c7\",\n  \"device\": {\n    \"id\": \"eb2dddb7-dc69-4521-9fbb-762b96eb921f\",\n    \"type\": \"<string>\",\n    \"platform\": {\n      \"type\": \"app\",\n      \"operating_system\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"ui_theme\": \"<string>\",\n    \"release_build\": \"<string>\"\n  },\n  \"product\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://airlines-api.hopper.com/airline/v1.1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ce38894c-3e87-4479-a59e-1d7f9bb51976",
+    "name": "Airline Analytics Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "In order to measure and continuously improve HTS Ancillaries performance, specific events occurring during a customer session can be sent by the partner airlines using some dedicated endpoints.",
+      "type": "text/plain"
+    }
+  }
+}

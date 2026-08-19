@@ -1,0 +1,283 @@
+{
+  "item": [
+    {
+      "id": "166010d8-52ee-4da1-b265-0a67d4b7bb39",
+      "name": "Authentication",
+      "description": {
+        "content": "This API is authenticated with OAuth 2, Client Credentials grant.\\\nClients should use their `client_id` and `client_secret` to obtain an `access_token`.\\\nThe `access_token` should be included in every request, as a `Bearer` token on an `Authorization` header.\\\nNote that `access_token`s eventually expire, requiring a new token to be fetched.\n\nsee [authentication](#tag/Authentication)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77b6b84f-61d9-4a86-8e65-4cac1de5f48f",
+          "name": "Create an authentication token",
+          "request": {
+            "name": "Create an authentication token",
+            "description": {
+              "content": "Get an authentication token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44a49995-3201-464d-a491-a4ae772614f7",
+              "name": "The authentication response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImtjN2FjWmV4bHBvZk1QY3V6UF9HTyJ9.eyJpc3MiOiJodHRwczovL2hvcHBlci1hcGkuYXV0aDAuY29tLyIsInN1YiI6IlhVdWpRSlRCODFPdkVTODh1VDlPNHhIUzVNUkpZV2tCQGNsaWVudHMiLCJhdWQiOiJodHRwczovL3N0YWdpbmcuYXBpLmhvcHBlci5jb20iLCJpYXQiOjE2NTI5ODQ2ODEsImV4cCI6MTY1MzA3MTA4MSwiYXpwIjoiWFV1alFKVEI4MU92RVM4OHVUOU80eEhTNU1SSllXa0IiLCJzY29wZSI6ImFsbDpwcmljZWZyZWV6ZSBhbGw6Z2VuZXJhbCBhbGw6Y2ZhciIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.VlKuMHJkGpOA-L9oJn-UBEOD7VdzLXQSn2DiTrlROR521uHupkRnI-_tDjYD-sygmNmI0bIb0UEQ2ETOyalFZICge8-qWpxBccM_rfgPemZ6Rs9fZSY8XjZtaM9sQEJ4OqwXQiIU0tQDVMfegj-4wnKglHAKzJ7X7wb05nSCP_g2cXIXL9mapnLT8vf609CZIz2cRuWvww5E9qlJ6mUQxsYBv9xwJoyF3IK8TCWUFFvu2xSendMltvUlCHJHjWpddFDTdkl1ErHq_ta-3e1n2ZjU1HVVux9dwWoZQDYJFprtDYjPS-jVhEljGMASB74zf_xbcWCwoa_HJlxLlhBhoQ\",\n  \"scope\": \"all:general all:cfar\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 86400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6c2b891-3326-4e22-9a94-31722054fe72",
+              "name": "Syntactic errors were encountered while handling the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"code\",\n      \"messages\": {\n        \"key\": \"messages\"\n      },\n      \"message\": \"message\"\n    },\n    {\n      \"code\": \"code\",\n      \"messages\": {\n        \"key\": \"messages\"\n      },\n      \"message\": \"message\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4c33fc4-f112-4c6a-8302-0fbcb9168698",
+              "name": "The client could not be authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc590ace-1167-4021-909b-187b04541eb6",
+              "name": "The authenticated client does not have permission to call this endpoint",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c0d6f620-8099-4f4c-9ac5-67844e23c3d9",
+              "name": "Semantic errors were encountered while handling the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"code\",\n      \"messages\": {\n        \"key\": \"messages\"\n      },\n      \"message\": \"message\"\n    },\n    {\n      \"code\": \"code\",\n      \"messages\": {\n        \"key\": \"messages\"\n      },\n      \"message\": \"message\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://airlines-api.hopper.com/airline/v1.1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ccfeefa4-f229-4e8b-84fd-18bda362fc6e",
+    "name": "Airline Analytics Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "In order to measure and continuously improve HTS Ancillaries performance, specific events occurring during a customer session can be sent by the partner airlines using some dedicated endpoints.",
+      "type": "text/plain"
+    }
+  }
+}
