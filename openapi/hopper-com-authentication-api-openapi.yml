@@ -1,8 +1,17 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Airline Analytics Authentication API
+  title: Airline Authentication API
   version: v1.1
-  description: In order to measure and continuously improve HTS Ancillaries performance, specific events occurring during a customer session can be sent by the partner airlines using some dedicated endpoints.
+  description: 'This API is authenticated with OAuth 2, Client Credentials grant.\
+
+    Clients should use their `client_id` and `client_secret` to obtain an `access_token`.\
+
+    The `access_token` should be included in every request, as a `Bearer` token on an `Authorization` header.\
+
+    Note that `access_token`s eventually expire, requiring a new token to be fetched.
+
+
+    see authentication'
 servers:
 - url: https://airlines-api.hopper.com/airline/v1.1
 tags:
@@ -15,7 +24,7 @@ tags:
     Note that `access_token`s eventually expire, requiring a new token to be fetched.
 
 
-    see [authentication](#tag/Authentication)'
+    see authentication'
   name: Authentication
 paths:
   /auth:
@@ -96,11 +105,6 @@ components:
       - errors
       title: unprocessable_entity
       type: object
-    token_type:
-      enum:
-      - Bearer
-      title: token_type
-      type: string
     error:
       example:
         code: code
@@ -150,6 +154,11 @@ components:
       - token_type
       title: auth_response
       type: object
+    token_type:
+      enum:
+      - Bearer
+      title: token_type
+      type: string
     auth_request:
       properties:
         client_id:
