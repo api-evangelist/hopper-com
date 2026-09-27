@@ -43,6 +43,21 @@ tags:
 - Ancillary Revenue
 - B2B
 - Loyalty
+- AI Agents
+tags_raw:
+- Travel
+- Travel Fintech
+- Price Prediction
+- Cancel For Any Reason
+- Disruption Guarantee
+- Price Freeze
+- Airlines
+- Hotels
+- Car Rental
+- Vacation Rentals
+- Ancillary Revenue
+- B2B
+- Loyalty
 - Agentic AI
 url: https://raw.githubusercontent.com/api-evangelist/hopper-com/refs/heads/main/apis.yml
 created: '2026-05-25'
@@ -149,11 +164,11 @@ apis:
   - type: SDKs
     url: https://github.com/hopper/hc-airlines-angular
 - aid: hopper-com:consumer-app
+  x-published: false
   name: Hopper Consumer App
   description: Consumer mobile and web app for booking flights, hotels, homes, and cars. Pioneered price prediction, Price Freeze, and flexible cancellation for end travelers. No public API.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://hopper.com/
-  baseURL: https://hopper.com
   tags:
   - Consumer
   - Booking
@@ -245,6 +260,12 @@ apis:
   humanURL: https://hts.hopper.com/products/hts-assist
   baseURL: https://hts.hopper.com
   tags:
+  - B2B
+  - AI Agents
+  - Customer Service
+  - Voice
+  - Chat
+  tags_raw:
   - B2B
   - Agentic AI
   - Customer Service

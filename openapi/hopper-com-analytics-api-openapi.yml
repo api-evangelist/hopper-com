@@ -73,26 +73,6 @@ paths:
       - Analytics
 components:
   schemas:
-    bad_request:
-      example:
-        errors:
-        - code: code
-          messages:
-            key: messages
-          message: message
-        - code: code
-          messages:
-            key: messages
-          message: message
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/error'
-          type: array
-      required:
-      - errors
-      title: bad_request
-      type: object
     unprocessable_entity:
       example:
         errors:
@@ -113,52 +93,6 @@ components:
       - errors
       title: unprocessable_entity
       type: object
-    error:
-      example:
-        code: code
-        messages:
-          key: messages
-        message: message
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-        messages:
-          additionalProperties:
-            type: string
-          title: map_string
-          type: object
-      required:
-      - message
-      title: error
-      type: object
-    offers_displayed:
-      properties:
-        occurred_date_time:
-          description: "A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime;\n the date and time at which an event occurred on a client device"
-          example: 2022-01-24 15:34:30+00:00
-          format: date-time
-          type: string
-        type:
-          enum:
-          - offers_displayed
-          type: string
-      required:
-      - occurred_date_time
-      - type
-      title: offers_displayed
-      type: object
-    event:
-      discriminator:
-        mapping:
-          booking_confirmed: '#/components/schemas/booking_confirmed'
-          offers_displayed: '#/components/schemas/offers_displayed'
-        propertyName: type
-      oneOf:
-      - $ref: '#/components/schemas/booking_confirmed'
-      - $ref: '#/components/schemas/offers_displayed'
-      title: event
     booking_confirmed:
       properties:
         occurred_date_time:
@@ -180,6 +114,72 @@ components:
       - occurred_date_time
       - type
       title: booking_confirmed
+      type: object
+    offers_displayed:
+      properties:
+        occurred_date_time:
+          description: "A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime;\n the date and time at which an event occurred on a client device"
+          example: 2022-01-24 15:34:30+00:00
+          format: date-time
+          type: string
+        type:
+          enum:
+          - offers_displayed
+          type: string
+      required:
+      - occurred_date_time
+      - type
+      title: offers_displayed
+      type: object
+    bad_request:
+      example:
+        errors:
+        - code: code
+          messages:
+            key: messages
+          message: message
+        - code: code
+          messages:
+            key: messages
+          message: message
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/error'
+          type: array
+      required:
+      - errors
+      title: bad_request
+      type: object
+    event:
+      discriminator:
+        mapping:
+          booking_confirmed: '#/components/schemas/booking_confirmed'
+          offers_displayed: '#/components/schemas/offers_displayed'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/booking_confirmed'
+      - $ref: '#/components/schemas/offers_displayed'
+      title: event
+    error:
+      example:
+        code: code
+        messages:
+          key: messages
+        message: message
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+        messages:
+          additionalProperties:
+            type: string
+          title: map_string
+          type: object
+      required:
+      - message
+      title: error
       type: object
   securitySchemes:
     PartnerAuth:
