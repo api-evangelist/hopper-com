@@ -82,67 +82,6 @@ paths:
       - Sessions
 components:
   schemas:
-    safari:
-      properties:
-        version:
-          type: string
-        type:
-          enum:
-          - safari
-          type: string
-      required:
-      - type
-      title: safari
-      type: object
-    product:
-      description: The product for which the session is opened.<br/>Required for sessions having flow_type "exercise".
-      enum:
-      - cfar
-      - dg
-      - all
-      title: product
-      type: string
-    flow_type:
-      description: The flow type for which the session is opened.
-      enum:
-      - purchase
-      - exercise
-      title: flow_type
-      type: string
-    chrome_os:
-      properties:
-        version:
-          example: 15.0.2
-          type: string
-        type:
-          enum:
-          - chrome_os
-          example: i_os
-          type: string
-      required:
-      - type
-      title: chrome_os
-      type: object
-    operating_system:
-      discriminator:
-        mapping:
-          android: '#/components/schemas/android'
-          chrome_os: '#/components/schemas/chrome_os'
-          i_os: '#/components/schemas/i_os'
-          linux: '#/components/schemas/linux'
-          mac_os: '#/components/schemas/mac_os'
-          other_os: '#/components/schemas/other_os'
-          windows: '#/components/schemas/windows'
-        propertyName: type
-      oneOf:
-      - $ref: '#/components/schemas/android'
-      - $ref: '#/components/schemas/chrome_os'
-      - $ref: '#/components/schemas/i_os'
-      - $ref: '#/components/schemas/linux'
-      - $ref: '#/components/schemas/mac_os'
-      - $ref: '#/components/schemas/other_os'
-      - $ref: '#/components/schemas/windows'
-      title: operating_system
     web:
       properties:
         operating_system:
@@ -158,147 +97,17 @@ components:
       - type
       title: web
       type: object
-    linux:
-      properties:
-        version:
-          example: 15.0.2
-          type: string
-        type:
-          enum:
-          - linux
-          example: i_os
-          type: string
-      required:
-      - type
-      title: linux
-      type: object
-    app:
-      properties:
-        operating_system:
-          $ref: '#/components/schemas/operating_system'
-        type:
-          enum:
-          - app
-          example: app
-          type: string
-      required:
-      - type
-      title: app
-      type: object
-    bad_request:
-      example:
-        errors:
-        - code: code
-          messages:
-            key: messages
-          message: message
-        - code: code
-          messages:
-            key: messages
-          message: message
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/error'
-          type: array
-      required:
-      - errors
-      title: bad_request
-      type: object
-    windows:
-      properties:
-        version:
-          example: 15.0.2
-          type: string
-        type:
-          enum:
-          - windows
-          example: i_os
-          type: string
-      required:
-      - type
-      title: windows
-      type: object
-    other_os:
-      properties:
-        name:
-          example: 15.0.2
-          type: string
-        version:
-          type: string
-        type:
-          enum:
-          - other_os
-          example: i_os
-          type: string
-      required:
-      - name
-      - type
-      title: other_os
-      type: object
-    other_browser:
-      properties:
-        name:
-          type: string
-        version:
-          type: string
-        type:
-          enum:
-          - other_browser
-          type: string
-      required:
-      - name
-      - type
-      title: other_browser
-      type: object
-    airline_session:
-      description: A airline session resource
-      example:
-        id: af585dfd-dddf-4726-9ef7-f1bb8909a79a
-      properties:
-        id:
-          description: A unique identifier for a airline session
-          example: af585dfd-dddf-4726-9ef7-f1bb8909a79a
-          type: string
-      required:
-      - id
-      title: airline_session
-      type: object
-    edge:
+    opera:
       properties:
         version:
           type: string
         type:
           enum:
-          - edge
+          - opera
           type: string
       required:
       - type
-      title: edge
-      type: object
-    firefox:
-      properties:
-        version:
-          type: string
-        type:
-          enum:
-          - firefox
-          type: string
-      required:
-      - type
-      title: firefox
-      type: object
-    internet_explorer:
-      properties:
-        version:
-          type: string
-        type:
-          enum:
-          - internet_explorer
-          type: string
-      required:
-      - type
-      title: internet_explorer
+      title: opera
       type: object
     mobile:
       properties:
@@ -322,6 +131,31 @@ components:
       - type
       title: mobile
       type: object
+    internet_explorer:
+      properties:
+        version:
+          type: string
+        type:
+          enum:
+          - internet_explorer
+          type: string
+      required:
+      - type
+      title: internet_explorer
+      type: object
+    app:
+      properties:
+        operating_system:
+          $ref: '#/components/schemas/operating_system'
+        type:
+          enum:
+          - app
+          example: app
+          type: string
+      required:
+      - type
+      title: app
+      type: object
     android:
       properties:
         version:
@@ -336,51 +170,40 @@ components:
       - type
       title: android
       type: object
-    opera:
+    other_browser:
       properties:
+        name:
+          type: string
         version:
           type: string
         type:
           enum:
-          - opera
+          - other_browser
           type: string
       required:
+      - name
       - type
-      title: opera
+      title: other_browser
       type: object
-    chrome:
+    unprocessable_entity:
+      example:
+        errors:
+        - code: code
+          messages:
+            key: messages
+          message: message
+        - code: code
+          messages:
+            key: messages
+          message: message
       properties:
-        version:
-          type: string
-        type:
-          enum:
-          - chrome
-          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/error'
+          type: array
       required:
-      - type
-      title: chrome
-      type: object
-    user_info:
-      description: An object containing information related to the airline's user. Should be included if known, but not if the user is anonymous.
-      properties:
-        airline_user_id:
-          description: The airline's unique identifier for a user; can be an arbitrary string
-          example: 2bcd6619-ac3e-403b-9982-3e12f2698a53
-          type: string
-        created_date_time:
-          description: A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime; the date and time at which a user's account was created
-          example: 2020-11-02 18:34:30+00:00
-          format: date-time
-          type: string
-        previous_bookings:
-          description: Number of prior bookings a user has made
-          example: 3
-          format: int32
-          minimum: 0
-          type: integer
-      required:
-      - airline_user_id
-      title: user_info
+      - errors
+      title: unprocessable_entity
       type: object
     create_airline_session_request:
       properties:
@@ -410,97 +233,38 @@ components:
       - point_of_sale
       title: create_airline_session_request
       type: object
-    unprocessable_entity:
-      example:
-        errors:
-        - code: code
-          messages:
-            key: messages
-          message: message
-        - code: code
-          messages:
-            key: messages
-          message: message
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/error'
-          type: array
-      required:
-      - errors
-      title: unprocessable_entity
-      type: object
-    device:
-      description: The end-user's device
-      discriminator:
-        mapping:
-          desktop: '#/components/schemas/desktop'
-          mobile: '#/components/schemas/mobile'
-          tablet: '#/components/schemas/tablet'
-        propertyName: type
-      oneOf:
-      - $ref: '#/components/schemas/desktop'
-      - $ref: '#/components/schemas/mobile'
-      - $ref: '#/components/schemas/tablet'
-      title: device
-    i_os:
+    product:
+      description: The product for which the session is opened.<br/>Required for sessions having flow_type "exercise".
+      enum:
+      - cfar
+      - dg
+      - all
+      title: product
+      type: string
+    chrome:
       properties:
         version:
-          example: 15.0.2
           type: string
         type:
           enum:
-          - i_os
-          example: i_os
+          - chrome
           type: string
       required:
       - type
-      title: i_os
+      title: chrome
       type: object
-    platform:
-      discriminator:
-        mapping:
-          app: '#/components/schemas/app'
-          web: '#/components/schemas/web'
-        propertyName: type
-      oneOf:
-      - $ref: '#/components/schemas/app'
-      - $ref: '#/components/schemas/web'
-      title: platform
-    mac_os:
+    firefox:
       properties:
         version:
-          example: 15.0.2
           type: string
         type:
           enum:
-          - mac_os
-          example: i_os
+          - firefox
           type: string
       required:
       - type
-      title: mac_os
+      title: firefox
       type: object
-    browser:
-      discriminator:
-        mapping:
-          chrome: '#/components/schemas/chrome'
-          edge: '#/components/schemas/edge'
-          firefox: '#/components/schemas/firefox'
-          internet_explorer: '#/components/schemas/internet_explorer'
-          opera: '#/components/schemas/opera'
-          other_browser: '#/components/schemas/other_browser'
-          safari: '#/components/schemas/safari'
-        propertyName: type
-      oneOf:
-      - $ref: '#/components/schemas/chrome'
-      - $ref: '#/components/schemas/edge'
-      - $ref: '#/components/schemas/firefox'
-      - $ref: '#/components/schemas/internet_explorer'
-      - $ref: '#/components/schemas/opera'
-      - $ref: '#/components/schemas/other_browser'
-      - $ref: '#/components/schemas/safari'
-      title: browser
     tablet:
       properties:
         id:
@@ -523,6 +287,109 @@ components:
       - type
       title: tablet
       type: object
+    device:
+      description: The end-user's device
+      discriminator:
+        mapping:
+          desktop: '#/components/schemas/desktop'
+          mobile: '#/components/schemas/mobile'
+          tablet: '#/components/schemas/tablet'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/desktop'
+      - $ref: '#/components/schemas/mobile'
+      - $ref: '#/components/schemas/tablet'
+      title: device
+    platform:
+      discriminator:
+        mapping:
+          app: '#/components/schemas/app'
+          web: '#/components/schemas/web'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/app'
+      - $ref: '#/components/schemas/web'
+      title: platform
+    edge:
+      properties:
+        version:
+          type: string
+        type:
+          enum:
+          - edge
+          type: string
+      required:
+      - type
+      title: edge
+      type: object
+    airline_session:
+      description: A airline session resource
+      example:
+        id: af585dfd-dddf-4726-9ef7-f1bb8909a79a
+      properties:
+        id:
+          description: A unique identifier for a airline session
+          example: af585dfd-dddf-4726-9ef7-f1bb8909a79a
+          type: string
+      required:
+      - id
+      title: airline_session
+      type: object
+    flow_type:
+      description: The flow type for which the session is opened.
+      enum:
+      - purchase
+      - exercise
+      title: flow_type
+      type: string
+    browser:
+      discriminator:
+        mapping:
+          chrome: '#/components/schemas/chrome'
+          edge: '#/components/schemas/edge'
+          firefox: '#/components/schemas/firefox'
+          internet_explorer: '#/components/schemas/internet_explorer'
+          opera: '#/components/schemas/opera'
+          other_browser: '#/components/schemas/other_browser'
+          safari: '#/components/schemas/safari'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/chrome'
+      - $ref: '#/components/schemas/edge'
+      - $ref: '#/components/schemas/firefox'
+      - $ref: '#/components/schemas/internet_explorer'
+      - $ref: '#/components/schemas/opera'
+      - $ref: '#/components/schemas/other_browser'
+      - $ref: '#/components/schemas/safari'
+      title: browser
+    mac_os:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - mac_os
+          example: i_os
+          type: string
+      required:
+      - type
+      title: mac_os
+      type: object
+    windows:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - windows
+          example: i_os
+          type: string
+      required:
+      - type
+      title: windows
+      type: object
     desktop:
       properties:
         id:
@@ -544,6 +411,139 @@ components:
       - id
       - type
       title: desktop
+      type: object
+    other_os:
+      properties:
+        name:
+          example: 15.0.2
+          type: string
+        version:
+          type: string
+        type:
+          enum:
+          - other_os
+          example: i_os
+          type: string
+      required:
+      - name
+      - type
+      title: other_os
+      type: object
+    operating_system:
+      discriminator:
+        mapping:
+          android: '#/components/schemas/android'
+          chrome_os: '#/components/schemas/chrome_os'
+          i_os: '#/components/schemas/i_os'
+          linux: '#/components/schemas/linux'
+          mac_os: '#/components/schemas/mac_os'
+          other_os: '#/components/schemas/other_os'
+          windows: '#/components/schemas/windows'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/android'
+      - $ref: '#/components/schemas/chrome_os'
+      - $ref: '#/components/schemas/i_os'
+      - $ref: '#/components/schemas/linux'
+      - $ref: '#/components/schemas/mac_os'
+      - $ref: '#/components/schemas/other_os'
+      - $ref: '#/components/schemas/windows'
+      title: operating_system
+    i_os:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - i_os
+          example: i_os
+          type: string
+      required:
+      - type
+      title: i_os
+      type: object
+    chrome_os:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - chrome_os
+          example: i_os
+          type: string
+      required:
+      - type
+      title: chrome_os
+      type: object
+    linux:
+      properties:
+        version:
+          example: 15.0.2
+          type: string
+        type:
+          enum:
+          - linux
+          example: i_os
+          type: string
+      required:
+      - type
+      title: linux
+      type: object
+    bad_request:
+      example:
+        errors:
+        - code: code
+          messages:
+            key: messages
+          message: message
+        - code: code
+          messages:
+            key: messages
+          message: message
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/error'
+          type: array
+      required:
+      - errors
+      title: bad_request
+      type: object
+    safari:
+      properties:
+        version:
+          type: string
+        type:
+          enum:
+          - safari
+          type: string
+      required:
+      - type
+      title: safari
+      type: object
+    user_info:
+      description: An object containing information related to the airline's user. Should be included if known, but not if the user is anonymous.
+      properties:
+        airline_user_id:
+          description: The airline's unique identifier for a user; can be an arbitrary string
+          example: 2bcd6619-ac3e-403b-9982-3e12f2698a53
+          type: string
+        created_date_time:
+          description: A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime; the date and time at which a user's account was created
+          example: 2020-11-02 18:34:30+00:00
+          format: date-time
+          type: string
+        previous_bookings:
+          description: Number of prior bookings a user has made
+          example: 3
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - airline_user_id
+      title: user_info
       type: object
     error:
       example:
