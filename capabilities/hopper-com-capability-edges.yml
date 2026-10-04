@@ -1,0 +1,26 @@
+slug: hopper-com
+provider: Hopper
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Analytics
+  spec_file: hopper-com-analytics-api-openapi.yml
+  capability_id: BC-4280.10
+  capability_id_l1: BC-4280
+  capability_name: Product Telemetry Instrumentation
+  confidence: 0.75
+  evidence: '"specific events occurring during a customer session can be sent by the partner airlines
+    using some dedicated endpoints"; POST /events  Send a Backend Event; schemas booking_confirmed, offers_displayed'
+  reason: Partners post typed product usage events (offers displayed, booking confirmed) against defined
+    event schemas so the vendor can measure and improve ancillary performance — telemetry instrumentation
+    ingest. Single endpoint keeps confidence moderate.

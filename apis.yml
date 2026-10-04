@@ -275,6 +275,9 @@ apis:
   - type: ProductPage
     url: https://hts.hopper.com/products/hts-assist
 common:
+- type: CapabilityMap
+  url: capabilities/hopper-com-capability-edges.yml
+  name: Hopper Business Capability Map
 - type: AgenticAccess
   url: agentic-access/hopper-com-agentic-access.yml
 - type: DomainSecurity
