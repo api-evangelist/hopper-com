@@ -73,26 +73,6 @@ paths:
       - Analytics
 components:
   schemas:
-    bad_request:
-      example:
-        errors:
-        - code: code
-          messages:
-            key: messages
-          message: message
-        - code: code
-          messages:
-            key: messages
-          message: message
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/error'
-          type: array
-      required:
-      - errors
-      title: bad_request
-      type: object
     unprocessable_entity:
       example:
         errors:
@@ -113,16 +93,26 @@ components:
       - errors
       title: unprocessable_entity
       type: object
-    event:
-      discriminator:
-        mapping:
-          booking_confirmed: '#/components/schemas/booking_confirmed'
-          offers_displayed: '#/components/schemas/offers_displayed'
-        propertyName: type
-      oneOf:
-      - $ref: '#/components/schemas/booking_confirmed'
-      - $ref: '#/components/schemas/offers_displayed'
-      title: event
+    error:
+      example:
+        code: code
+        messages:
+          key: messages
+        message: message
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+        messages:
+          additionalProperties:
+            type: string
+          title: map_string
+          type: object
+      required:
+      - message
+      title: error
+      type: object
     booking_confirmed:
       properties:
         occurred_date_time:
@@ -161,25 +151,35 @@ components:
       - type
       title: offers_displayed
       type: object
-    error:
+    event:
+      discriminator:
+        mapping:
+          booking_confirmed: '#/components/schemas/booking_confirmed'
+          offers_displayed: '#/components/schemas/offers_displayed'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/booking_confirmed'
+      - $ref: '#/components/schemas/offers_displayed'
+      title: event
+    bad_request:
       example:
-        code: code
-        messages:
-          key: messages
-        message: message
+        errors:
+        - code: code
+          messages:
+            key: messages
+          message: message
+        - code: code
+          messages:
+            key: messages
+          message: message
       properties:
-        message:
-          type: string
-        code:
-          type: string
-        messages:
-          additionalProperties:
-            type: string
-          title: map_string
-          type: object
+        errors:
+          items:
+            $ref: '#/components/schemas/error'
+          type: array
       required:
-      - message
-      title: error
+      - errors
+      title: bad_request
       type: object
   securitySchemes:
     PartnerAuth:

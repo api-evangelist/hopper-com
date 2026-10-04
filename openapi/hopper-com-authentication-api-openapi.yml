@@ -65,31 +65,6 @@ paths:
       - Authentication
 components:
   schemas:
-    token_type:
-      enum:
-      - Bearer
-      title: token_type
-      type: string
-    bad_request:
-      example:
-        errors:
-        - code: code
-          messages:
-            key: messages
-          message: message
-        - code: code
-          messages:
-            key: messages
-          message: message
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/error'
-          type: array
-      required:
-      - errors
-      title: bad_request
-      type: object
     unprocessable_entity:
       example:
         errors:
@@ -110,17 +85,31 @@ components:
       - errors
       title: unprocessable_entity
       type: object
-    auth_request:
+    error:
+      example:
+        code: code
+        messages:
+          key: messages
+        message: message
       properties:
-        client_id:
+        message:
           type: string
-        client_secret:
+        code:
           type: string
+        messages:
+          additionalProperties:
+            type: string
+          title: map_string
+          type: object
       required:
-      - client_id
-      - client_secret
-      title: auth_request
+      - message
+      title: error
       type: object
+    token_type:
+      enum:
+      - Bearer
+      title: token_type
+      type: string
     auth_response:
       example:
         access_token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImtjN2FjWmV4bHBvZk1QY3V6UF9HTyJ9.eyJpc3MiOiJodHRwczovL2hvcHBlci1hcGkuYXV0aDAuY29tLyIsInN1YiI6IlhVdWpRSlRCODFPdkVTODh1VDlPNHhIUzVNUkpZV2tCQGNsaWVudHMiLCJhdWQiOiJodHRwczovL3N0YWdpbmcuYXBpLmhvcHBlci5jb20iLCJpYXQiOjE2NTI5ODQ2ODEsImV4cCI6MTY1MzA3MTA4MSwiYXpwIjoiWFV1alFKVEI4MU92RVM4OHVUOU80eEhTNU1SSllXa0IiLCJzY29wZSI6ImFsbDpwcmljZWZyZWV6ZSBhbGw6Z2VuZXJhbCBhbGw6Y2ZhciIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.VlKuMHJkGpOA-L9oJn-UBEOD7VdzLXQSn2DiTrlROR521uHupkRnI-_tDjYD-sygmNmI0bIb0UEQ2ETOyalFZICge8-qWpxBccM_rfgPemZ6Rs9fZSY8XjZtaM9sQEJ4OqwXQiIU0tQDVMfegj-4wnKglHAKzJ7X7wb05nSCP_g2cXIXL9mapnLT8vf609CZIz2cRuWvww5E9qlJ6mUQxsYBv9xwJoyF3IK8TCWUFFvu2xSendMltvUlCHJHjWpddFDTdkl1ErHq_ta-3e1n2ZjU1HVVux9dwWoZQDYJFprtDYjPS-jVhEljGMASB74zf_xbcWCwoa_HJlxLlhBhoQ
@@ -150,25 +139,36 @@ components:
       - token_type
       title: auth_response
       type: object
-    error:
-      example:
-        code: code
-        messages:
-          key: messages
-        message: message
+    auth_request:
       properties:
-        message:
+        client_id:
           type: string
-        code:
+        client_secret:
           type: string
-        messages:
-          additionalProperties:
-            type: string
-          title: map_string
-          type: object
       required:
-      - message
-      title: error
+      - client_id
+      - client_secret
+      title: auth_request
+      type: object
+    bad_request:
+      example:
+        errors:
+        - code: code
+          messages:
+            key: messages
+          message: message
+        - code: code
+          messages:
+            key: messages
+          message: message
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/error'
+          type: array
+      required:
+      - errors
+      title: bad_request
       type: object
   securitySchemes:
     PartnerAuth:
