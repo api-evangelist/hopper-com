@@ -1,4 +1,4 @@
-# Hopper (hopper-com)
+# Hopper
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,84 +66,111 @@
 
 Hopper is a Boston- and Montreal-based travel booking platform and B2B travel fintech provider serving more than 120 million travelers globally. Its consumer app aggregates flights, hotels, rental cars, and homes alongside proprietary price prediction and a family of "for any reason" fintech ancillaries — Price Freeze, Cancel For Any Reason (CFAR), Change For Any Reason, Leave For Any Reason, and Disruption Guarantee. Through its B2B division, Hopper Technology Solutions (HTS), the company licenses those same fintech ancillaries, agentic AI customer service (HTS Assist), white-label travel agency products (HTS Stays, HTS Cars, HTS Packages), and travel loyalty portals to airlines, banks, and travel providers. HTS exposes a documented OAuth2-secured REST API — the HTS Airline API v1.1 — for embedding CFAR and Disruption Guarantee contracts in airline booking flows, with OpenAPI-generated SDKs for Java, .NET, Angular, and iOS, plus a JavaScript SDK for hotel price-freeze integration.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/hopper-com/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/hopper-com/refs/heads/main/apis.yml)
+**Areas:** Travel · Travel Fintech · Price Prediction · Cancel For Any Reason · Disruption Guarantee · Price Freeze · Airlines · Hotels · Car Rental · Vacation Rentals · Ancillary Revenue · B2B
 
-## Scope
+## Hopper on APIs.io
 
-- **Type:** Index
-- **Position:** Provider
-- **Access:** 3rd-Party
+Everything profiled for Hopper is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/hopper-com/](https://apis.io/providers/hopper-com/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (12)
 
-- Travel
-- Travel Fintech
-- Price Prediction
-- Cancel For Any Reason
-- Disruption Guarantee
-- Price Freeze
-- Airlines
-- Hotels
-- Car Rental
-- Vacation Rentals
-- Ancillary Revenue
-- B2B
-- Loyalty
-- Agentic AI
+- [Hopper Analytics API](https://apis.io/apis/hopper-com/hopper-com-analytics-api/) — In order to measure and continuously improve HTS Ancillaries performance, specific events occurring during a customer session can be sent by the partner…
+- [Hopper Authentication API](https://apis.io/apis/hopper-com/hopper-com-authentication-api/) — This API is authenticated with OAuth 2, Client Credentials grant.\ Clients should use their `client_id` and `client_secret` to obtain an `access_token`.\…
+- [Hopper Cancel For Any Reason (CFAR) API](https://apis.io/apis/hopper-com/hopper-com-cancel-for-any-reason-cfar-api/) — **What is Cancel For Any Reason?** Cancel For Any Reason (CFAR) enables airlines to offer refundability as an ancillary with HTS powering the dynamic…
+- [Hopper Disruption Guarantee (DG) API](https://apis.io/apis/hopper-com/hopper-com-disruption-guarantee-dg-api/) — **What is Disruption Guarantee?** Disruption Guarantee (DG) offers a premium disruption assistance service to customers in case of flight disruption,…
+- [Hopper Sessions API](https://apis.io/apis/hopper-com/hopper-com-sessions-api/) — Hopper uses a unique ID to correlate API calls and events produced by a user's interaction with an airline application. The duration of the user's…
+- [Hopper Consumer App](https://apis.io/apis/hopper-com/consumer-app/) — Consumer mobile and web app for booking flights, hotels, homes, and cars. Pioneered price prediction, Price Freeze, and flexible cancellation for end…
+- [HTS Stays](https://apis.io/apis/hopper-com/hts-stays/) — Hopper Technology Solutions lodging e-commerce platform that gives partners access to global hotel inventory with conversion-optimized UX and merchandising.…
+- [HTS Cars](https://apis.io/apis/hopper-com/hts-cars/) — Car rental e-commerce platform from HTS that partners embed for global car rental inventory and booking. Partner-gated.
+- [HTS Packages](https://apis.io/apis/hopper-com/hts-packages/) — Bundled flight + hotel package product from HTS. Partner-gated.
+- [HTS Fintech Ancillaries (Cancel for Any Reason, Disruption Assistance, Seat Upgrades)](https://apis.io/apis/hopper-com/hts-fintech-ancillaries/) — Proprietary fintech ancillaries that partners attach to their bookings — Cancel for Any Reason (airlines and hotels), Disruption Assistance for Any Reason,…
+- [HTS Travel Loyalty Portals (Banks)](https://apis.io/apis/hopper-com/hts-loyalty-portals/) — Travel loyalty portals powering bank travel programs, used by partners such as Capital One Travel and RBC. Partner-gated.
+- [HTS Assist (Agentic AI Customer Service)](https://apis.io/apis/hopper-com/hts-assist/) — Agentic AI built specifically for airline and travel customer service, delivering end-to-end autonomous resolutions via voice and chat. Sold to airlines and…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### HTS Airline API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Hopper Technology Solutions Airline API lets airlines embed Hopper's ancillary fintech products — Cancel For Any Reason (CFAR) and Disruption Guarantee (DG) — directly into their booking flow. Airlines call the API to create a user session, request CFAR or DG offers for an itinerary, bind an offer into a contract, take payment, update itinerary slices, and later exercise the contract (cancel, refund, or rebook) on behalf of the customer. The API is OAuth2 Client Credentials authenticated, uses an HC-Session-ID correlation header, and exposes 23 operations under https://airlines-api.hopper.com/airline/v1.1.
+- [Hopper Com Agentic Access](https://apis.io/agentic-access/hopper-com/hopper-com-agentic-access/)
 
-- **Human URL:** [https://github.com/hopper/hc-airlines-java](https://github.com/hopper/hc-airlines-java)
-- **Base URL:** `https://airlines-api.hopper.com/airline/v1.1`
+#### Collections (6)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Airlines
-- Travel Fintech
-- Cancel For Any Reason
-- Disruption Guarantee
-- Ancillary Revenue
-- OAuth2
+- [Airline API](https://apis.io/collections/hopper-com/open-hopper-airlines/)
+- [Airline Analytics API](https://apis.io/collections/hopper-com/open-hopper-com-analytics-api/)
+- [Airline Analytics Authentication API](https://apis.io/collections/hopper-com/open-hopper-com-authentication-api/)
+- [Airline Analytics Cancel For Any Reason (CFAR) API](https://apis.io/collections/hopper-com/open-hopper-com-cancel-for-any-reason-cfar-api/)
+- [Airline Analytics Disruption Guarantee (DG) API](https://apis.io/collections/hopper-com/open-hopper-com-disruption-guarantee-dg-api/)
+- [Airline Analytics Sessions API](https://apis.io/collections/hopper-com/open-hopper-com-sessions-api/)
 
-#### Properties
+#### Security (2)
 
-- [OpenAPI](openapi/hopper-airlines-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/hopper-airlines.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hopper-airlines.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Documentation](https://github.com/hopper/hc-airlines-java)
-- [SDK](https://github.com/hopper/hc-airlines-java)
-- [SDK](https://github.com/hopper/hts-airlines-dotnet)
-- [SDK](https://github.com/hopper/hc-airlines-angular)
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Hopper Com Authentication](https://apis.io/security/hopper-com/hopper-com-authentication/)
+- [Hopper Com Domain Security](https://apis.io/security/hopper-com/hopper-com-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.hopper.com)
-- [B2 B](https://hts.hopper.com)
-- [Product](https://hts.hopper.com/cancel-for-any-reason)
-- [Product](https://hts.hopper.com/disruption-assistance-for-any-reason)
-- [Product](https://hts.hopper.com/hts-stays)
-- [Product](https://hts.hopper.com/hts-cars)
-- [Product](https://hts.hopper.com/hts-packages)
-- [Product](https://hts.hopper.com/travel-loyalty-portals)
-- [Product](https://hts.hopper.com/hts-assist)
-- [Company](https://www.hopper.com/about)
-- [Press](https://www.hopper.com/press)
-- [Careers](https://www.hopper.com/careers)
-- [Contact](https://hts.hopper.com/contact)
-- [Git Hub](https://github.com/hopper)
-- [Twitter](https://twitter.com/hopper)
-- [LinkedIn](https://www.linkedin.com/company/hopper)
+- [Blog](https://hts.hopper.com/newsroom)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 58.0 |
+| Contract quality | 49.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 0.0 |
+
+**Agent readiness 25.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/hopper-com/](https://apis.io/providers/hopper-com/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Hopper: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/hopper-com/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
